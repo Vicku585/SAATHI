@@ -1,4 +1,6 @@
 from fastapi import FastAPI, Depends
+from fastapi.responses import FileResponse
+from pathlib import Path
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import joblib
@@ -98,9 +100,8 @@ class OperationalDataCreate(BaseModel):
 
 @app.get("/")
 def home():
-    return {
-        "message": "Sentinels API is running!"
-    }
+    frontend_path = Path(__file__).resolve().parent.parent / "frontend" / "index.html"
+    return FileResponse(frontend_path)
 
 
 # ==========================================

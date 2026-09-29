@@ -1408,7 +1408,10 @@
    API CONFIGURATION
 ===================================================== */
 
-const API_URL = "http://127.0.0.1:8000";
+const API_URL =
+    window.location.protocol === "file:"
+        ? "http://127.0.0.1:8000"
+        : window.location.origin;
 
 const TOKEN_KEY = "sentinels_access_token";
 const USER_KEY = "sentinels_user";
