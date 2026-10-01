@@ -104,6 +104,21 @@ def home():
     return FileResponse(frontend_path)
 
 
+# Serve frontend assets alongside the FastAPI application.
+# The HTML references these files from the site root, so Render must expose
+# them explicitly in addition to serving index.html.
+@app.get("/style.css")
+def frontend_stylesheet():
+    stylesheet_path = Path(__file__).resolve().parent.parent / "frontend" / "style.css"
+    return FileResponse(stylesheet_path, media_type="text/css")
+
+
+@app.get("/app.js")
+def frontend_javascript():
+    javascript_path = Path(__file__).resolve().parent.parent / "frontend" / "app.js"
+    return FileResponse(javascript_path, media_type="application/javascript")
+
+
 # ==========================================
 # 8. Protected Authentication Test
 # ==========================================
